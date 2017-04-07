@@ -74,5 +74,12 @@ Vagrant.configure(2) do |config|
        sudo chmod go+rX /opt/kraken
        echo "export PATH=$PATH:/opt/kraken" >> /etc/bash.bashrc
      fi
+     KRAKEN_DB_PATH=/vagrant/db
+     if [ -d $KRAKEN_DB_PATH/minikraken ]; then
+       mkdir -p $KRAKEN_DB_PATH/minikraken
+       cd $KRAKEN_DB_PATH/minikraken
+       wget http://ccb.jhu.edu/software/kraken/dl/minikraken.tgz -O- | tar xzvf -
+       echo "KRAKEN_DB_PATH=$KRAKEN_DB_PATH" >> /etc/bash.bashrc
+     fi
    SHELL
 end
